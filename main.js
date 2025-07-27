@@ -52,6 +52,10 @@ function createWindow() {
       document.addEventListener('touchmove', e => e.preventDefault(), { passive: false });
     `);
   });
+
+  mainWindow.webContents.on('context-menu', (e, params) => {
+    mainWindow.webContents.inspectElement(params.x, params.y);
+  });
 }
 
 app.whenReady().then(createWindow);
