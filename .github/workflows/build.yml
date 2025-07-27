@@ -1,0 +1,55 @@
+name: Build Electron App
+
+on:
+  push:
+    tags:
+      - 'v*.*.*'  # 仅在推送 tag（如 v1.0.0）时触发
+
+jobs:
+  build-mac:
+    name: Build macOS App
+    runs-on: macos-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.2
+
+      - run: npm install
+
+      - run: npm run build || echo "No frontend build step"
+
+      - run: npx electron-builder --mac
+
+      - name: Upload macOS artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: mac-app
+          path: dist/*.dmg
+
+  build-win:
+    name: Build Windows App
+    runs-on: windows-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 16.20.2
+
+      - run: npm install
+
+      - run: npm run build || echo "No frontend build step"
+
+      - run: npx electron-builder --win
+
+      - name: Upload Windows artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: win-app
+          path: dist/*.exe
