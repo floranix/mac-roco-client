@@ -16,7 +16,8 @@ function getFlashPluginPath() {
   }
 }
 
-let version = '34.0.0.330';
+// let version = '34.0.0.330';
+let version = '34.0.0.342';
 let pluginPath = getFlashPluginPath();
 
 console.log('Flash Plugin Path:', pluginPath);
@@ -24,6 +25,8 @@ console.log('Flash Plugin Path:', pluginPath);
 app.commandLine.appendSwitch('ppapi-flash-path', pluginPath);
 app.commandLine.appendSwitch('ppapi-flash-version', version);
 app.commandLine.appendSwitch('--disable-http-cache');
+app.commandLine.appendSwitch('disable-component-update');
+app.commandLine.appendSwitch('disable-features', 'FlashDeprecationWarning');
 
 function createWindow() {
   const mainWindow = new BrowserWindow({

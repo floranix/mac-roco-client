@@ -19,6 +19,13 @@ npm config set electron_mirror https://npmmirror.com/mirrors/electron/
 npm start
 ```
 
+# 升级flash版本
+找到本地Flash文件, 位置一般是
+```
+/Library/Internet Plug-Ins/PepperFlashPlayer/PepperFlashPlayer.plugin
+```
+将项目`plugins/PepperFlashPlayer.plugin`文件替换为该`PepperFlashPlayer.plugin`, 然后打包即可
+
 
 # 说明
 fork from [mac-roco-client](https://github.com/wlz196/mac-roco-client)
